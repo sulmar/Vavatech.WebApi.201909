@@ -78,6 +78,21 @@ IsRemoved
 
 ~~~
 
+~~~
+Product
+-------
+Id
+Name
+Color
+UnitPrice
+SerialNumber
+~~~
+
+~~~
+GET api/products
+~~~
+
+
 
 
 
