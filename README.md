@@ -78,6 +78,15 @@ IsRemoved
 
 ~~~
 
+Product
+-------
+Id
+Name
+Color
+UnitPrice
+SerialNumber
+
+
 
 
 
