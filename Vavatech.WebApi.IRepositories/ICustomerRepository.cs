@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using Vavatech.WebApi.Models;
 
 namespace Vavatech.WebApi.IRepositories
 {
-    public interface ICustomerRepository
+
+    public interface ICustomerRepository : IEntityRepository<Customer>
     {
-        Customer Get(int id);
-        IEnumerable<Customer> Get();
-        void Add(Customer customer);
-        void Update(Customer customer);
-        void Remove(int id);
     }
+
+
 }

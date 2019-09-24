@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vavatech.WebApi.Fakers\Vavatech.WebApi.Fakers.csproj" />
     <ProjectReference Include="..\Vavatech.WebApi.IRepositories\Vavatech.WebApi.IRepositories.csproj" />
   </ItemGroup>
 

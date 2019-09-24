@@ -12,6 +12,11 @@ namespace Vavatech.WebApi.DbRepositories
             throw new NotImplementedException();
         }
 
+        public bool Exists(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Customer Get(int id)
         {
             throw new NotImplementedException();
