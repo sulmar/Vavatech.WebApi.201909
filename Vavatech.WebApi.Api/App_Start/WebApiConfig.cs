@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Filters;
 using Unity;
+using Vavatech.WebApi.Api.Filters;
 using Vavatech.WebApi.Api.Resolvers;
 using Vavatech.WebApi.FakeRepositories;
 using Vavatech.WebApi.Fakers;
@@ -27,8 +29,12 @@ namespace Vavatech.WebApi.Api
             container.RegisterSingleton<ICustomerRepository, FakeCustomerRepository>();
             container.RegisterSingleton<CustomerFaker>();
 
+            container.RegisterType<IAuthenticationFilter, BasicAuthenticationFilter>();
+
             config.DependencyResolver = new UnityDependencyResolver(container);
 
+
+            config.Filters.Add(container.Resolve<IAuthenticationFilter>());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

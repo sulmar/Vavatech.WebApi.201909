@@ -87,5 +87,10 @@ namespace Vavatech.WebApi.FakeRepositories
             bool isAllWoman = customers.All(c => c.Gender == Gender.Woman);
           
         }
+
+        public Customer Authorize(string username, string password)
+        {
+            return customers.SingleOrDefault(c => c.UserName == username && c.HashPassword == password);
+        }
     }
 }

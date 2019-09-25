@@ -39,5 +39,8 @@ namespace Vavatech.WebApi.Models
         public Gender Gender { get; set; }
         public bool IsRemoved { get; set; }
 
+        public string UserName { get; set; }
+        public string HashPassword { get; set; }
+
     }
 }

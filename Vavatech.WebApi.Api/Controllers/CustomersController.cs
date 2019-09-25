@@ -9,6 +9,7 @@ using Vavatech.WebApi.Models;
 
 namespace Vavatech.WebApi.Api.Controllers
 {
+    [Authorize(Roles = "Developer, Administrator")]
     public class CustomersController : ApiController
     {
         private ICustomerRepository customerRepository;
@@ -27,6 +28,11 @@ namespace Vavatech.WebApi.Api.Controllers
         // api/customers
         public IHttpActionResult Get()
         {
+            if (!this.User.Identity.IsAuthenticated)
+            {
+                return Unauthorized();
+            }
+
             var customers = customerRepository.Get();
 
             return Ok(customers);

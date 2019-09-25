@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Vavatech.WebApi.Fakers;
 using Vavatech.WebApi.Models;
 
 namespace Vavatech.WebApi.ConsoleClient
@@ -19,7 +21,7 @@ namespace Vavatech.WebApi.ConsoleClient
         static async Task Main(string[] args)
         {
             // await AsyncAwaitTest();
-
+            await AddCustomerTest();
             await GetCustomerByIdTest(10);
             await GetCustomersTest2();
             await GetProductsTest();
@@ -30,8 +32,46 @@ namespace Vavatech.WebApi.ConsoleClient
             Console.ReadKey();
         }
 
+        private static async Task AddCustomers()
+        {
+            var customerFaker = new CustomerFaker();
+            List<Customer> customers = customerFaker.Generate(10);
 
-    
+            foreach (var customer in customers)
+            {
+                await AddCustomer(customer);
+            }
+
+        }
+          
+
+        private static async Task AddCustomer(Customer customer)
+        {
+           
+            string request = "api/customers";
+
+            string json = JsonConvert.SerializeObject(customer);
+
+            string url = "https://localhost:44375";
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(url);
+
+            HttpContent content = new StringContent(json);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            content.Headers.Add("Authorization", "marcin:12345");
+
+            HttpResponseMessage response = await client.PostAsync(request, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = response.Content.ReadAsStringAsync();
+                Console.WriteLine(response.Headers.Location);
+
+
+            }
+
+        }
 
         private static async Task GetCustomersTest()
         {
@@ -66,7 +106,7 @@ namespace Vavatech.WebApi.ConsoleClient
             string request = "api/customers";
 
             var customers = await GetEntitiesTest<IEnumerable<Customer>>(request);
-        }
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
         private static async Task GetProductsTest()
         {

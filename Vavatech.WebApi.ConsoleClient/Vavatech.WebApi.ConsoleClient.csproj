@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bogus, Version=28.3.1.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.28.3.1\lib\net40\Bogus.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -54,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Vavatech.WebApi.Fakers\Vavatech.WebApi.Fakers.csproj">
+      <Project>{F2D32235-AF80-41D6-9935-EB780B1DDD71}</Project>
+      <Name>Vavatech.WebApi.Fakers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Vavatech.WebApi.Models\Vavatech.WebApi.Models.csproj">
       <Project>{76D00A84-54B4-4DAB-9045-A5A50C32D95E}</Project>
       <Name>Vavatech.WebApi.Models</Name>
