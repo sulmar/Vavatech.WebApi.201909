@@ -21,7 +21,7 @@ namespace Vavatech.WebApi.ConsoleClient
         static async Task Main(string[] args)
         {
             // await AsyncAwaitTest();
-            await AddCustomerTest();
+           // await AddCustomerTest();
             await GetCustomerByIdTest(10);
             await GetCustomersTest2();
             await GetProductsTest();

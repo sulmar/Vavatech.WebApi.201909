@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Vavatech.WebApi.IRepositories;
 using Vavatech.WebApi.Models;
 
@@ -7,34 +11,41 @@ namespace Vavatech.WebApi.DbRepositories
 {
     public class DbCustomerRepository : ICustomerRepository
     {
-        public void Add(Customer customer)
+        private readonly MyContext context;
+
+        public DbCustomerRepository(MyContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public bool Exists(int id)
+        public void Add(Customer entity)
         {
-            throw new NotImplementedException();
+            context.Customers.Add(entity);
+            context.SaveChanges();
         }
 
-        public Customer Get(int id)
+        public Customer Authorize(string username, string password)
         {
-            throw new NotImplementedException();
+            return context.Customers.SingleOrDefault(c => c.UserName == username && c.HashPassword == password);
         }
 
-        public IEnumerable<Customer> Get()
-        {
-            throw new NotImplementedException();
-        }
+        public bool Exists(int id) => context.Customers.Any(c => c.Id == id);
+
+        public Customer Get(int id) => context.Customers.Find(id);
+
+        public IEnumerable<Customer> Get() => context.Customers.ToList();
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            Customer customer = new Customer { Id = id };
+            context.Entry(customer).State = EntityState.Deleted;
+            context.SaveChanges();
         }
 
-        public void Update(Customer customer)
+        public void Update(Customer entity)
         {
-            throw new NotImplementedException();
+            context.Entry(entity).State = EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }
